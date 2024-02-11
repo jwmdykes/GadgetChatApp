@@ -37,7 +37,7 @@ export const HeaderItem: FunctionComponent<HeaderItemProps> = ({
   return (
     <div
       {...props}
-      className='decoration-transparent hover:decoration-themeBlack hover:underline underline-offset-8 transition ease-in-out duration-300 hover:-translate-y-1 mt-1'
+      className='decoration-transparent hover:decoration-themeBlack hover:underline underline-offset-8 transition ease-in-out duration-300 hover:-translate-y-1 py-3'
     >
       {children}
     </div>

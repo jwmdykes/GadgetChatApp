@@ -26,6 +26,7 @@ import VerifyEmailPage from './routes/verify-email';
 import ChangePassword from './routes/change-password';
 import ForgotPassword from './routes/forgot-password';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 const App = () => {
   useEffect(() => {
@@ -105,9 +106,12 @@ const Layout = () => {
       navigate={navigate}
       auth={window.gadgetConfig.authentication}
     >
-      <div className='bg-neutral-100 w-full h-full text-themeBlack'>
+      <div className='flex flex-col bg-neutral-100 w-full h-full text-themeBlack'>
         <Header />
-        <Outlet />
+        <div className='flex-grow'>
+          <Outlet />
+        </div>
+        <Footer />
       </div>
     </Provider>
   );

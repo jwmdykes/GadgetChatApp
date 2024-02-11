@@ -2,25 +2,22 @@ import { SignedOut } from '@gadgetinc/react';
 import React, { ComponentProps, ReactNode } from 'react';
 import { FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
+import Logo from './base/Logo';
 
 interface HeaderProps {}
 
 const Header: FunctionComponent<HeaderProps> = () => {
   return (
-    <nav className='flex items-center justify-between bg-slate-100 h-12 shadow-md'>
-      <HeaderItem>
-        <a href='/' target='_self' rel='noreferrer'>
-          {process.env.GADGET_PUBLIC_APP_SLUG}
-        </a>
-      </HeaderItem>
-      <div className='flex items-center justify-center'>
+    <nav className='flex items-center justify-between h-14 px-5 bg-white border-neutral-300 border-b-[1px]'>
+      <Logo />
+      <div className='flex items-center justify-center gap-5'>
         <SignedOut>
-          <HeaderItem>
-            <Link to='/sign-in'>Sign in</Link>
-          </HeaderItem>
-          <HeaderItem>
-            <Link to='/sign-up'>Sign up</Link>
-          </HeaderItem>
+          <Link to='/sign-in'>
+            <HeaderItem>Sign in</HeaderItem>
+          </Link>
+          <Link to='/sign-up'>
+            <HeaderItem>Sign up</HeaderItem>
+          </Link>
         </SignedOut>
       </div>
     </nav>
@@ -40,7 +37,7 @@ export const HeaderItem: FunctionComponent<HeaderItemProps> = ({
   return (
     <div
       {...props}
-      className='px-3 py-1 hover:text-teal-400 font-medium text-xl'
+      className='decoration-transparent hover:decoration-themeBlack hover:underline underline-offset-8 transition ease-in-out duration-300 hover:-translate-y-1 mt-1'
     >
       {children}
     </div>

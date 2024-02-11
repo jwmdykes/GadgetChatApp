@@ -1,5 +1,4 @@
 import { useUser, useSignOut } from "@gadgetinc/react";
-import reactLogo from "../assets/react-logo.svg";
 import { api } from "../api";
 import userIcon from "../assets/default-user-icon.svg";
 import { Link } from "react-router-dom";
@@ -11,7 +10,6 @@ export default function () {
   return user ? (
     <>
       <div className="app-link">
-        <img src={reactLogo} className="app-logo" alt="logo" />
         <span>You are now signed into {process.env.GADGET_PUBLIC_APP_SLUG} </span>
       </div>
       <div>

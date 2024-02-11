@@ -105,11 +105,9 @@ const Layout = () => {
       navigate={navigate}
       auth={window.gadgetConfig.authentication}
     >
-      <Header />
-      <div className='app'>
-        <div className='app-content'>
-          <Outlet />
-        </div>
+      <div className='bg-neutral-100 w-full h-full text-themeBlack'>
+        <Header />
+        <Outlet />
       </div>
     </Provider>
   );

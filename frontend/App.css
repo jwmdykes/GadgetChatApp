@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-span {
-  font-size: xx-large;
+* {
+  font-family: 'Varela Round';
 }

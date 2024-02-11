@@ -1,4 +1,4 @@
-import { SignedOut } from '@gadgetinc/react';
+import { SignedIn, SignedOut } from '@gadgetinc/react';
 import React, { ComponentProps, ReactNode } from 'react';
 import { FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
@@ -19,6 +19,11 @@ const Header: FunctionComponent<HeaderProps> = () => {
             <HeaderItem>Sign up</HeaderItem>
           </Link>
         </SignedOut>
+        <SignedIn>
+          <Link to='/sign-out'>
+            <HeaderItem>Sign out</HeaderItem>
+          </Link>
+        </SignedIn>
       </div>
     </nav>
   );

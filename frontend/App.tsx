@@ -107,15 +107,19 @@ const Layout = () => {
       navigate={navigate}
       auth={window.gadgetConfig.authentication}
     >
-      <div className='flex flex-col bg-white w-full h-full text-themeBlack'>
-        <div className='flex flex-grow '>
+      <div className='grid grid-cols-[auto_1fr] grid-rows-[auto_minmax(0,1fr)_auto] w-full h-full'>
+        <div className='col-span-1 col-start-1 row-span-2 row-start 1'>
           <Sidebar />
-          <div className='flex flex-col w-full h-full'>
-            <Header />
-            <Outlet />
-          </div>
         </div>
-        <Footer />
+        <div className='col-span-1 col-start-2 row-span-1 row-start-1'>
+          <Header />
+        </div>
+        <div className='col-span-1 col-start-2 row-span-1 row-start-2'>
+          <Outlet />
+        </div>
+        <div className='col-span-2 col-start-1 row-span-1 row-start-3'>
+          <Footer />
+        </div>
       </div>
     </Provider>
   );

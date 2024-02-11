@@ -16,6 +16,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@gadget-client/chat-demo": "link:.gadget/client",
     "@gadgetinc/react": "^0.15.0",
+    "@tailwindcss/typography": "^0.5.10",
     "autoprefixer": "^10.4.17",
     "gadget-server": "link:.gadget/server",
     "postcss": "^8.4.35",

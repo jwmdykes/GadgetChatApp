@@ -10,7 +10,7 @@ I tried making a simple chat app using Gadget to see how the experience is versu
   - These are automatically generated based on user provided data models which is very convenient.
   - Database migrations are also managed automatically.
 - A node.js backend using Fastify
-- React
+- React support using vite for development
 - Support for easily accessing Shopify and OpenAI APIs called "Connections".
 
 ## Initial thoughts
@@ -39,10 +39,20 @@ It would be nice to have more control over the template that is created when cre
 
 I was able to get Typescript and TailwindCSS working without too much trouble, but having to set these up myself is definitely not ideal for a platform that tries to make developing as fast and hassle-free as possible!
 
+### Better typescript support
+
+When trying to use the Rest or GraphQL apis, it would be awesome if we had access to typescript definitions of the data models. For example, I was building a `MessageBubble` react component for my chat app. This component should take in as props a `message` object and a `user` object which come from my database. It would make it super fast to build components if these types were provided!
+
+Since Gadget already supports GraphQL this should be pretty easy to accomplish using something like [GraphQL Code Generator](https://the-guild.dev/graphql/codegen/plugins/typescript/typescript)
+
 ### A more powerful cli
 
 Also it would be awesome if the cli was more powerful. If we could create new projects (also with an interactive dialog!), and have more functions available to manage our projects that would be very useful.
 
-## Other questions
+## More supported frameworks!
 
 I love using React, so it's great that Gadget supports React. But given that they use Vite which supports other frameworks, I wonder why Gadget doesn't support these too. It seems like this should be possible given that Vite already supports it.
+
+## Small issues
+
+- When deleting an action, filter or model, you should be prompted to ask if you would like to delete the corresponding Javascript file as well.

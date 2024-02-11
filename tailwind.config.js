@@ -8,6 +8,7 @@ module.exports = {
         themeGreen: '#1ddeab',
         themeYellow: '#fec134',
         themeBlack: '#012c4f',
+        themeBorderColor: '#d4d4d4',
       },
       fontFamily: {
         varelaRound: ['Varela Round'],

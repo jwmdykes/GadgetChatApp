@@ -27,6 +27,7 @@ import ChangePassword from './routes/change-password';
 import ForgotPassword from './routes/forgot-password';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Sidebar from './components/Sidebar';
 
 const App = () => {
   useEffect(() => {
@@ -106,10 +107,13 @@ const Layout = () => {
       navigate={navigate}
       auth={window.gadgetConfig.authentication}
     >
-      <div className='flex flex-col bg-neutral-100 w-full h-full text-themeBlack'>
-        <Header />
-        <div className='flex-grow'>
-          <Outlet />
+      <div className='flex flex-col bg-white w-full h-full text-themeBlack'>
+        <div className='flex flex-grow '>
+          <Sidebar />
+          <div className='flex flex-col w-full h-full'>
+            <Header />
+            <Outlet />
+          </div>
         </div>
         <Footer />
       </div>

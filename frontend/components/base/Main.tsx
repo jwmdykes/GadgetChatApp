@@ -7,7 +7,10 @@ interface MainProps extends ComponentProps<'main'> {
 
 const Main: FunctionComponent<MainProps> = ({ children, ...props }) => {
   return (
-    <main {...props} className='mt-10 container m-auto'>
+    <main
+      {...props}
+      className='p-10 w-full h-full bg-neutral-100 border-l-[1px] border-t-[1px] border-b-[1px] border-themeBorderColor rounded-l-2xl'
+    >
       {children}
     </main>
   );

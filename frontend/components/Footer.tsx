@@ -9,7 +9,7 @@ interface FooterProps extends ComponentProps<'footer'> {}
 
 const Footer: FunctionComponent<FooterProps> = () => {
   return (
-    <footer className='flex justify-between bg-white border-t-[1px] border-neutral-200 p-4 text-gray-500 font-extralight text-sm'>
+    <footer className='flex justify-between p-4 text-gray-500 font-extralight text-sm'>
       <ul className='flex items-center'>
         <li>Created by John Dykes</li>
       </ul>
@@ -38,7 +38,7 @@ const Footer: FunctionComponent<FooterProps> = () => {
               <img
                 src={jwmdykesFaviconURL}
                 alt='jwmdykes.ca favicon'
-                className='max-h-5 brightness-100 hover:brightness-125 saturate-0 hover:saturate-100'
+                className='max-h-5 brightness-125 saturate-0 hover:saturate-100'
               />
             </a>
           </ul>

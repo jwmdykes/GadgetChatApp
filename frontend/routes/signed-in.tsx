@@ -3,19 +3,28 @@ import { api } from '../api';
 import Main from '../components/base/Main';
 import MessageList from '../components/Messages/MessageList';
 import React from 'react';
+import InputBox from '../components/Messages/InputBox';
 
 export default function () {
   const user = useUser(api);
 
   return user ? (
     <Main>
-      {/* <SampleMarkdown user={user} /> */}
-      <MessageList></MessageList>
+      <div className='flex flex-col h-full justify-end'>
+        <div className='max-h-fit overflow-y-scroll p-6 '>
+          <MessageList />
+        </div>
+        <div className='z-10'>
+          <InputBox />
+        </div>
+      </div>
     </Main>
-  ) : null;
+  ) : (
+    <Welcome user={user} />
+  );
 }
 
-const SampleMarkdown = function ({ user }) {
+const Welcome = function ({ user }) {
   return (
     <div className='prose lg:prose-lg mx-auto'>
       <h1>Welcome, {user.firstName}!</h1>

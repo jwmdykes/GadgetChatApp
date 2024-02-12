@@ -14,7 +14,7 @@ interface MessageBubbleProps extends ComponentProps<'section'> {
 
 const MessageBubble: FunctionComponent<MessageBubbleProps> = ({ message }) => {
   return (
-    <section className='p-5 rounded-lg bg-blue-100 w-full h-fit'>
+    <section className='p-4 rounded-r-2xl rounded-tl-2xl bg-blue-100 w-fit max-w-2xl h-fit prose'>
       {message.content}
     </section>
   );

@@ -3,6 +3,7 @@ import React, { ComponentProps, ReactNode } from 'react';
 import { FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from './base/Logo';
+import { api } from 'gadget-server';
 
 interface HeaderProps {}
 
@@ -23,7 +24,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
         </SignedOut>
         <SignedIn>
           <Link to='/sign-out'>
-            <HeaderItem>Sign out</HeaderItem>
+            <HeaderItem onClick={() => {}}>Sign out</HeaderItem>
           </Link>
         </SignedIn>
       </div>

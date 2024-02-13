@@ -8,8 +8,10 @@ interface HeaderProps {}
 
 const Header: FunctionComponent<HeaderProps> = () => {
   return (
-    <nav className='flex items-center justify-between h-[64px] px-5 '>
-      <Logo />
+    <nav className='flex items-center justify-between h-[64px] pr-5 '>
+      <div className='flex-1'>
+        <Logo />
+      </div>
       <div className='flex items-center justify-center gap-5'>
         <SignedOut>
           <Link to='/sign-in'>

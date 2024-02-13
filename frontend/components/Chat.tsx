@@ -2,7 +2,6 @@ import { useUser, useFindMany, useActionForm } from '@gadgetinc/react';
 import { api } from '../api';
 import { useState, useMemo } from 'react';
 import MessageList from './Messages/MessageList';
-import { Message, Room } from './Messages/Types';
 import InputBox from './Messages/InputBox';
 
 export interface ChatProps {}
@@ -38,7 +37,15 @@ const Chat = ({ ...props }: ChatProps) => {
     ]);
 
     try {
-      await api.message.create({ ...optimisticMessage });
+      await api.message.create({
+        content: messageText,
+        room: {
+          _link: '123',
+        },
+        user: {
+          _link: user.id,
+        },
+      });
     } finally {
       setOptimisticMessages((prev: any) =>
         prev.filter((msg: any) => msg.id !== optimisticId)

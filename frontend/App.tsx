@@ -21,10 +21,6 @@ import Index from './routes/index';
 import SignedInPage from './routes/signed-in';
 import SignInPage from './routes/sign-in';
 import SignUpPage from './routes/sign-up';
-import ResetPasswordPage from './routes/reset-password';
-import VerifyEmailPage from './routes/verify-email';
-import ChangePassword from './routes/change-password';
-import ForgotPassword from './routes/forgot-password';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
@@ -54,22 +50,6 @@ const App = () => {
           }
         />
         <Route
-          path='change-password'
-          element={
-            <SignedInOrRedirect>
-              <ChangePassword />
-            </SignedInOrRedirect>
-          }
-        />
-        <Route
-          path='forgot-password'
-          element={
-            <SignedOutOrRedirect>
-              <ForgotPassword />
-            </SignedOutOrRedirect>
-          }
-        />
-        <Route
           path='sign-in'
           element={
             <SignedOutOrRedirect>
@@ -85,8 +65,6 @@ const App = () => {
             </SignedOutOrRedirect>
           }
         />
-        <Route path='reset-password' element={<ResetPasswordPage />} />
-        <Route path='verify-email' element={<VerifyEmailPage />} />
       </Route>
     )
   );

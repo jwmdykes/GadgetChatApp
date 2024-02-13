@@ -23,18 +23,21 @@ const Chat = ({ ...props }: ChatProps) => {
     const optimisticId = (Date.now() + Math.random()).toString();
     const optimisticMessage = {
       content: messageText,
-      room: {
-        id: '123',
-      },
-      user: user,
+      room: '123',
+      user: user.id,
     };
-    setOptimisticMessages((prev: any) => [
-      ...prev,
-      {
-        id: optimisticId,
-        ...optimisticMessage,
-      },
-    ]);
+    setOptimisticMessages((prev: any) => {
+      const opt = [
+        ...prev,
+        {
+          id: optimisticId,
+          ...optimisticMessage,
+        },
+      ];
+      console.log(`OPTIMISTIC`);
+      console.log(opt);
+      return opt;
+    });
 
     try {
       await api.message.create({

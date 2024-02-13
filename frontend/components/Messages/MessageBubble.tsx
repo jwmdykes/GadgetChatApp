@@ -2,7 +2,7 @@ import { ComponentProps, FunctionComponent } from 'react';
 import { Message, User } from './Types';
 
 interface MessageBubbleProps extends ComponentProps<'section'> {
-  message: Message;
+  message: any;
   user: User;
 }
 
@@ -10,9 +10,9 @@ const MessageBubble: FunctionComponent<MessageBubbleProps> = ({
   message,
   user,
 }) => {
-  console.log('IN MESSAGEBUBBLE');
-  console.log(message);
-  console.log(user);
+  // console.log('IN MESSAGEBUBBLE');
+  // console.log(message);
+  // console.log(user);
   const bubbleColor =
     message.user === user.id
       ? 'bg-blue-100 ml-auto rounded-tr-2xl rounded-l-2xl'

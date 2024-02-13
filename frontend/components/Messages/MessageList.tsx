@@ -18,7 +18,6 @@ const MessageList: FunctionComponent<MessageListProps> = ({
   const messagesEndRef = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
-    console.log(messages);
     messagesEndRef.current!.scrollIntoView({ behavior: 'instant' });
   }, [messages]);
 

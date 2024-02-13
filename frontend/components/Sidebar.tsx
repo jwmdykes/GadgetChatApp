@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { ComponentProps, FunctionComponent } from 'react';
 
 interface SidebarProps extends ComponentProps<'nav'> {}

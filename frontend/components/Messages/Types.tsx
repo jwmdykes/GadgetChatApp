@@ -1,5 +1,3 @@
-import { GadgetRecord } from '@gadget-client/chat-demo';
-
 // export type Message = GadgetRecord<{
 //   __typename: 'Message';
 //   id: string;

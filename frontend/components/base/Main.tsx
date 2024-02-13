@@ -1,4 +1,3 @@
-import React from 'react';
 import { ComponentProps, FunctionComponent, ReactNode } from 'react';
 
 interface MainProps extends ComponentProps<'main'> {

@@ -1,6 +1,6 @@
 # Trying out [Gadget](gadget.dev)
 
-I tried making a simple chat app using Gadget to see how the experience is versus what you would need to do to create an app with similar features from scratch.
+I tried making a simple chat app using Gadget to see how the experience is versus what you would need to do to create an app with similar features from scratch. Here are my rough notes about what I found good, and what were my pain points that could be improved when working with Gadget.
 
 ## What Gadget comes with out of the box
 
@@ -31,7 +31,30 @@ The AI assistant is pretty awesome, though. When I started my application, I wan
 
 ![alt text](./pictures/assistant_is_helpful.png)
 
+## Build in editor
+
+The built in editor definitely leaves a lot to be desired, especially compared with something like Visual Studio Code. In particular with Typescript the intellisense did not work very well. This makes sense to me since building a fully featured code editor is a huge undertaking. I think the Gadget team could keep the in-website code editor as a simple way to edit files quickly, and focus more on improving the feature set of the command line tools.
+
+In particular, I think creating a `create-gadget-app` npm package to match the style of `create-react-app`, `create-next-app` and for vite `create vite` would be a great step to making Gadget feel more familiar to developers in the React ecosystem. 
+
+In order to focus more on the cli, it would need to be more powerful. Some great features would be:
+
+- Better logging of build errors and warnings
+  - When I was building my chat app, I periodically got build errors and had to run `yarn vite:build` in order to see them in my code editor.
+  - The errors also appear in the web app, but can be easily missed when working in a separate code editor.
+- More options when creating a project.
+  - Options for using typescript, tailwind, git, etc.
+  - Discussed in [link](more-options-in-templates)
+
 ## Features that would be nice to have
+
+### Better integration with git
+
+Like most web developers I like to use git for version control in my projects. The git workflow with Gadget is a bit awkward. It feels like there is potential for data loss if the `ggt sync` tool gets confused about what files are the most recent. I don't know what the proper solution to this is, but at the very least being able to commit changes to git in the web interface would make me feel less nervous that any changes I make in the web interface (for example to this readme file) will be lost when I run `ggt sync` later. 
+
+However, to be fair this did not happen to me yet.
+
+One potential solution that may work for multiple developers working on a project at the same time would be for there to be two versions of the website. One that follows the most HEAD in git, and one that follows the most recent commit. That way, we can always look at the most recent version of our website according to git, which should in theory always be working.
 
 ### Admin panel
 
@@ -43,7 +66,7 @@ Gadget could try to compete with CMSs like Wordpress, or headless CMSs like Stra
 
 Gadget could be a great option for example when building a website for a small business or a blog which can rely on server side rendered pages for the vast majority of requests but still needs to periodically rebuild those static pages when there are changes to the database.
 
-In some sense Gadget could aim to be a middle-ground between inevitably slower server side generated WordPress websites, and faster but harder to setup and host websites using a headless CMS.
+In some sense Gadget could aim to be easier to set-up and more performant that both WordPress websites, and headless CMS websites.
 
 ### More options in templates
 
@@ -53,9 +76,9 @@ I was able to get Typescript and TailwindCSS working without too much trouble, b
 
 ### Better typescript support
 
-When trying to use the Rest or GraphQL apis, it would be awesome if we had access to typescript definitions of the data models. For example, I was building a `MessageBubble` react component for my chat app. This component should take in as props a `message` object and a `user` object which come from my database. It would make it super fast to build components if these types were provided!
+When trying to use the Rest or GraphQL apis, it would be awesome if we had access to typescript definitions of the data models. For example, I was building a `MessageBubble` react component for my chat app. This component should take in as props a `message` object and a `user` object which come from my database. It would make it super fast to build components if these types were provided! They seem to be listed in the API documentation, but I couldn't find the types in my project itself.
 
-I was able to access the types like this:
+I had to create my own custom types like this:
 
 ```
 message: GadgetRecord<{
@@ -67,13 +90,8 @@ message: GadgetRecord<{
 }>;
 ```
 
-but hardcoding this value means I have to update my component props when my data model changes. Maybe there is already a way to do what I want, but I couldn't find it in the documentation. Since the backend already knows the types, it shouldn't be too difficult to provide them to the user in an easily consumable manner.
+but hardcoding this value means I have to update my component props when my data model changes. This is more generally a pain point when using GraphQL with typescript, but there are tools that make it easier. Alternatively, focusing more on the simpler REST api could also be a good idea, especially considering that the focus of Gadget is on making apps as quickly and easily as possible. 
 
-### A more powerful cli
-
-Also it would be awesome if the cli was more powerful. If we could create new projects (also with an interactive dialog!), and have more functions available to manage our projects that would be very useful.
-
-Also, when using `ggt sync`, the CLI should forward build errors to the console. When I was building my chat app, I periodically got build errors and had to run `yarn vite:build` in order to see them in my code editor. The errors also appear in the web app, but can be easily missed when working in a separate code editor.
 
 ### More supported frameworks!
 
@@ -89,3 +107,4 @@ I haven't tried the "pro" offerings from Gadget so I don't know if there is alre
 
 - When deleting an action, filter or model, you should be prompted to ask if you would like to delete the corresponding Javascript file as well.
 - The font size in the monaco code editor in the website is quite small for me. It would be nice to be able to resize the font only rather than the entire page (perhaps with control + scroll like in Visual Studio Code).
+- Since I use typescript, at some point I renamed my vite.config.js file to vite.config.ts, but this caused my build to fail without errors. These kinds of errors should be reported to the user better (and typescript should be supported eventually). It can be frustrating to debug issues like this when you don't have access to the running environment or the build logs.

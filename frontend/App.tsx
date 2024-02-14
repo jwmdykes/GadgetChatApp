@@ -1,10 +1,8 @@
 import {
   SignedInOrRedirect,
-  SignedOut,
   SignedOutOrRedirect,
   Provider,
 } from '@gadgetinc/react';
-import React from 'react';
 import { Suspense, useEffect } from 'react';
 import {
   Outlet,
@@ -34,7 +32,7 @@ const App = () => {
         <Route
           index
           element={
-            <SignedOutOrRedirect>
+            <SignedOutOrRedirect path='/signed-in'>
               <Index />
             </SignedOutOrRedirect>
           }
@@ -42,7 +40,7 @@ const App = () => {
         <Route
           path='signed-in'
           element={
-            <SignedInOrRedirect>
+            <SignedInOrRedirect path='/'>
               <SignedInPage />
             </SignedInOrRedirect>
           }

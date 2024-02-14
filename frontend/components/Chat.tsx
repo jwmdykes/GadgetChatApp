@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 import MessageList from './Messages/MessageList';
 import InputBox from './Messages/InputBox';
 
-export interface ChatProps { }
+export interface ChatProps {}
 
 const Chat = ({ ...props }: ChatProps) => {
   const user = useUser(api);
@@ -16,7 +16,6 @@ const Chat = ({ ...props }: ChatProps) => {
       content: true,
       user: {
         id: true,
-        createdAt: true,
       },
     },
   });
@@ -29,9 +28,13 @@ const Chat = ({ ...props }: ChatProps) => {
 
   if (error) {
     console.error(error);
-    return <div className='prose w-full h-full flex justify-center items-center mx-auto'>
-      <h1 className='bg-red-100 p-8 rounded-2xl'>Error Loading Messages.</h1>
-    </div>
+    return (
+      <div className='prose w-full h-full flex justify-center items-center mx-auto'>
+        <h1 className='bg-red-100 p-8 rounded-2xl border-b-4 border-l-4 border-red-300 shadow-sm'>
+          Error Loading Messages.
+        </h1>
+      </div>
+    );
   }
 
   const sendMessage = async (messageText: string) => {
@@ -39,7 +42,7 @@ const Chat = ({ ...props }: ChatProps) => {
     const optimisticMessage = {
       content: messageText,
       room: '123',
-      user: user
+      user: user,
     };
     setOptimisticMessages((prev: any) => {
       const opt = [
@@ -73,8 +76,8 @@ const Chat = ({ ...props }: ChatProps) => {
 
   return (
     <div className='flex flex-col h-full justify-end'>
-      <div className='max-h-fit overflow-y-scroll p-6 '>
-        <div className='max-w-4xl mx-auto'>
+      <div className='flex-grow max-h-fit p-6 overflow-y-scroll'>
+        <div className='max-w-4xl mx-auto mt-'>
           <MessageList messages={messages} user={user} />
         </div>
       </div>

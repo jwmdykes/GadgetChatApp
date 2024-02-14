@@ -5,7 +5,7 @@ import Logo from './base/Logo';
 import { useUser } from '@gadgetinc/react';
 import { api } from '../api';
 
-interface HeaderProps { }
+interface HeaderProps {}
 
 const Header: FunctionComponent<HeaderProps> = () => {
   const user = useUser(api);
@@ -17,9 +17,13 @@ const Header: FunctionComponent<HeaderProps> = () => {
       </div>
       <div className='flex items-center justify-center gap-5'>
         <SignedIn>
-          <HeaderItem onClick={async () => {
-            await api.user.signOut(user.id);
-          }}>Sign out</HeaderItem>
+          <HeaderItem
+            onClick={async () => {
+              await api.user.signOut(user.id);
+            }}
+          >
+            Sign out
+          </HeaderItem>
         </SignedIn>
       </div>
     </nav>
@@ -39,7 +43,7 @@ export const HeaderItem: FunctionComponent<HeaderItemProps> = ({
   return (
     <div
       {...props}
-      className='decoration-transparent hover:decoration-themeBlack hover:underline underline-offset-8 transition ease-in-out duration-300 hover:-translate-y-1 py-3 hover:cursor-pointer'
+      className='decoration-transparent hover:decoration-lightning-yellow-500 hover:underline underline-offset-8 transition ease-in-out duration-300 hover:-translate-y-1 py-3 hover:cursor-pointer'
     >
       {children}
     </div>

@@ -17,17 +17,17 @@ const Footer: FunctionComponent<FooterProps> = () => {
         <span>Check me out at</span>
 
         <ul className='flex items-center gap-3'>
-          <li className='hover:text-themeBlack'>
+          <li className='hover:text-lightning-yellow-500'>
             <a href='https://github.com/jwmdykes'>
               <FontAwesomeIcon icon={faGithub} size='xl'></FontAwesomeIcon>
             </a>
           </li>
-          <li className='hover:text-themeBlack'>
+          <li className='hover:text-lightning-yellow-500'>
             <a href='mailto:98johndykes@gmail.com'>
               <FontAwesomeIcon icon={faEnvelope} size='xl'></FontAwesomeIcon>
             </a>
           </li>
-          <li className='hover:text-themeBlack'>
+          <li className='hover:text-lightning-yellow-500'>
             <a href='https://github.com/jwmdykes'>
               <FontAwesomeIcon icon={faMedium} size='xl' />
             </a>

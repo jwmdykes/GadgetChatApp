@@ -14,8 +14,12 @@ const Chat = ({ ...props }: ChatProps) => {
     select: {
       id: true,
       content: true,
+      createdAt: true,
       user: {
         id: true,
+        firstName: true,
+        lastName: true,
+        googleImageUrl: true,
       },
     },
   });
@@ -52,8 +56,6 @@ const Chat = ({ ...props }: ChatProps) => {
           ...optimisticMessage,
         },
       ];
-      console.log(`OPTIMISTIC`);
-      console.log(opt);
       return opt;
     });
 

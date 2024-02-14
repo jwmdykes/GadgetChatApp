@@ -1,31 +1,25 @@
-import { SignedIn, SignedOut } from '@gadgetinc/react';
+import { SignedIn } from '@gadgetinc/react';
 import React, { ComponentProps, ReactNode } from 'react';
 import { FunctionComponent } from 'react';
-import { Link } from 'react-router-dom';
 import Logo from './base/Logo';
-import { api } from 'gadget-server';
+import { useUser } from '@gadgetinc/react';
+import { api } from '../api';
 
-interface HeaderProps {}
+interface HeaderProps { }
 
 const Header: FunctionComponent<HeaderProps> = () => {
+  const user = useUser(api);
+
   return (
     <nav className='flex items-center justify-between h-[64px] pr-5 '>
       <div className='flex-1'>
         <Logo />
       </div>
       <div className='flex items-center justify-center gap-5'>
-        <SignedOut>
-          <Link to='/sign-in'>
-            <HeaderItem>Sign in</HeaderItem>
-          </Link>
-          <Link to='/sign-up'>
-            <HeaderItem>Sign up</HeaderItem>
-          </Link>
-        </SignedOut>
         <SignedIn>
-          <Link to='/sign-out'>
-            <HeaderItem onClick={() => {}}>Sign out</HeaderItem>
-          </Link>
+          <HeaderItem onClick={async () => {
+            await api.user.signOut(user.id);
+          }}>Sign out</HeaderItem>
         </SignedIn>
       </div>
     </nav>
@@ -45,7 +39,7 @@ export const HeaderItem: FunctionComponent<HeaderItemProps> = ({
   return (
     <div
       {...props}
-      className='decoration-transparent hover:decoration-themeBlack hover:underline underline-offset-8 transition ease-in-out duration-300 hover:-translate-y-1 py-3'
+      className='decoration-transparent hover:decoration-themeBlack hover:underline underline-offset-8 transition ease-in-out duration-300 hover:-translate-y-1 py-3 hover:cursor-pointer'
     >
       {children}
     </div>

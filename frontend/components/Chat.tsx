@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 import MessageList from './Messages/MessageList';
 import InputBox from './Messages/InputBox';
 
-export interface ChatProps {}
+export interface ChatProps { }
 
 const Chat = ({ ...props }: ChatProps) => {
   const user = useUser(api);
@@ -12,19 +12,34 @@ const Chat = ({ ...props }: ChatProps) => {
     last: 20,
     live: true,
     select: {
-      _all: true,
+      id: true,
+      content: true,
+      user: {
+        id: true,
+        createdAt: true,
+      },
     },
   });
+
   const [optimisticMessages, setOptimisticMessages] = useState<any>([]);
 
+  const messages = useMemo(() => {
+    return [...(data || []), ...(optimisticMessages || [])];
+  }, [data, optimisticMessages]);
+
+  if (error) {
+    console.error(error);
+    return <div className='prose w-full h-full flex justify-center items-center mx-auto'>
+      <h1 className='bg-red-100 p-8 rounded-2xl'>Error Loading Messages.</h1>
+    </div>
+  }
+
   const sendMessage = async (messageText: string) => {
-    console.log('DATA');
-    console.log(data);
     const optimisticId = (Date.now() + Math.random()).toString();
     const optimisticMessage = {
       content: messageText,
       room: '123',
-      user: user.id,
+      user: user
     };
     setOptimisticMessages((prev: any) => {
       const opt = [
@@ -56,15 +71,12 @@ const Chat = ({ ...props }: ChatProps) => {
     }
   };
 
-  const messages = useMemo(() => {
-    const allValues = data ? data.map((x) => x._all) : [];
-    return [...allValues, ...optimisticMessages];
-  }, [data, optimisticMessages]);
-
   return (
     <div className='flex flex-col h-full justify-end'>
       <div className='max-h-fit overflow-y-scroll p-6 '>
-        <MessageList messages={messages} user={user} />
+        <div className='max-w-4xl mx-auto'>
+          <MessageList messages={messages} user={user} />
+        </div>
       </div>
       <div className='z-10'>
         <InputBox sendMessage={sendMessage} />

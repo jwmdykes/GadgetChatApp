@@ -19,8 +19,6 @@ import './App.css';
 import { api } from './api';
 import Index from './routes/index';
 import SignedInPage from './routes/signed-in';
-import SignInPage from './routes/sign-in';
-import SignUpPage from './routes/sign-up';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
@@ -47,22 +45,6 @@ const App = () => {
             <SignedInOrRedirect>
               <SignedInPage />
             </SignedInOrRedirect>
-          }
-        />
-        <Route
-          path='sign-in'
-          element={
-            <SignedOutOrRedirect>
-              <SignInPage />
-            </SignedOutOrRedirect>
-          }
-        />
-        <Route
-          path='sign-up'
-          element={
-            <SignedOutOrRedirect>
-              <SignUpPage />
-            </SignedOutOrRedirect>
           }
         />
       </Route>

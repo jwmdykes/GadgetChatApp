@@ -35,7 +35,7 @@ The AI assistant is pretty awesome, though. When I started my application, I wan
 
 The built in editor definitely leaves a lot to be desired, especially compared with something like Visual Studio Code. In particular with Typescript the intellisense did not work very well. This makes sense to me since building a fully featured code editor is a huge undertaking. I think the Gadget team could keep the in-website code editor as a simple way to edit files quickly, and focus more on improving the feature set of the command line tools.
 
-In particular, I think creating a `create-gadget-app` npm package to match the style of `create-react-app`, `create-next-app` and for vite `create vite` would be a great step to making Gadget feel more familiar to developers in the React ecosystem. 
+In particular, I think creating a `create-gadget-app` npm package to match the style of `create-react-app`, `create-next-app` and for vite `create vite` would be a great step to making Gadget feel more familiar to developers in the React ecosystem.
 
 In order to focus more on the cli, it would need to be more powerful. Some great features would be:
 
@@ -50,7 +50,7 @@ In order to focus more on the cli, it would need to be more powerful. Some great
 
 ### Better integration with git
 
-Like most web developers I like to use git for version control in my projects. The git workflow with Gadget is a bit awkward. It feels like there is potential for data loss if the `ggt sync` tool gets confused about what files are the most recent. I don't know what the proper solution to this is, but at the very least being able to commit changes to git in the web interface would make me feel less nervous that any changes I make in the web interface (for example to this readme file) will be lost when I run `ggt sync` later. 
+Like most web developers I like to use git for version control in my projects. The git workflow with Gadget is a bit awkward. It feels like there is potential for data loss if the `ggt sync` tool gets confused about what files are the most recent. I don't know what the proper solution to this is, but at the very least being able to commit changes to git in the web interface would make me feel less nervous that any changes I make in the web interface (for example to this readme file) will be lost when I run `ggt sync` later.
 
 However, to be fair this did not happen to me yet.
 
@@ -90,8 +90,7 @@ message: GadgetRecord<{
 }>;
 ```
 
-but hardcoding this value means I have to update my component props when my data model changes. This is more generally a pain point when using GraphQL with typescript, but there are tools that make it easier. Alternatively, focusing more on the simpler REST api could also be a good idea, especially considering that the focus of Gadget is on making apps as quickly and easily as possible. 
-
+but hardcoding this value means I have to update my component props when my data model changes. This is more generally a pain point when using GraphQL with typescript, but there are tools that make it easier. Alternatively, focusing more on the simpler REST api could also be a good idea, especially considering that the focus of Gadget is on making apps as quickly and easily as possible.
 
 ### More supported frameworks!
 
@@ -108,3 +107,4 @@ I haven't tried the "pro" offerings from Gadget so I don't know if there is alre
 - When deleting an action, filter or model, you should be prompted to ask if you would like to delete the corresponding Javascript file as well.
 - The font size in the monaco code editor in the website is quite small for me. It would be nice to be able to resize the font only rather than the entire page (perhaps with control + scroll like in Visual Studio Code).
 - Since I use typescript, at some point I renamed my vite.config.js file to vite.config.ts, but this caused my build to fail without errors. These kinds of errors should be reported to the user better (and typescript should be supported eventually). It can be frustrating to debug issues like this when you don't have access to the running environment or the build logs.
+- Debugging the server is difficult. At some point during development I got errors in my graphQL requests: ErrorWrapper: [Network] Missing data. This error message could be better.

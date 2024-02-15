@@ -6,6 +6,11 @@ module.exports = {
       colors: {
         themeTeal: '#5fecfb',
         themeGreen: '#1ddeab',
+        'pastel-blue': '#8bd3e6',
+        'pastel-red': '#ffa2a0ff',
+        'pastel-yellow': '#f7f97c',
+        'pastel-orange': '#fbdaae',
+        'pastel-purple': '#c7b8de',
         'lightning-yellow': {
           50: '#fffbeb',
           100: '#fff2c6',
@@ -28,4 +33,12 @@ module.exports = {
     },
   },
   plugins: [require('@tailwindcss/typography')],
+  safelist: [
+    'bg-pastel-blue',
+    'bg-pastel-red',
+    'bg-pastel-yellow',
+    'bg-pastel-orange',
+    'bg-pastel-purple',
+    'bg-neutral-300',
+  ],
 };

@@ -18,40 +18,47 @@ const MessageBubble: FunctionComponent<MessageBubbleProps> = ({
       : 'bg-green-100 rounded-bl-2xl rounded-r-2xl';
   bubbleStyle += simpleBubble ? ' rounded-2xl' : '';
 
-  const textAlignment = message.user.id === user.id ? 'ml-auto' : 'mr-auto';
+  const textAlignment =
+    message.user.id === user.id ? 'ml-auto' : 'ml-auto md:ml-0 md:mr-auto';
 
   const profilePicture = simpleBubble ? (
-    <div className='w-12'></div>
+    <div className='w-10 h-10 md:w-12 md:h-12'></div>
   ) : (
     <img
-      className='mt-1 rounded-full h-12 w-12 shadow-md hover:cursor-pointer'
+      className='md:mt-[1px] rounded-full w-10 h-10 md:h-12 md:w-12 shadow-md hover:cursor-pointer transform'
       src={message.user.googleImageUrl}
       alt={`${message.user.firstName} ${message.user.lastName}'s profile picture`}
     />
   );
 
+  const name = message.user.firstName ?? 'Unknown';
+
+  const date = new Date(message.createdAt).toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+
   const messageBubble = (
     <div
-      className={`flex flex-col px-6 py-2 justify-center items-center max-w-2xl w-fit shadow-sm text-lg ${bubbleStyle}`}
+      className={`flex flex-col px-4 md:px-6 py-2 justify items-center max-w-2xl w-fit shadow-sm text-base md:text-lg ${bubbleStyle}`}
     >
       {simpleBubble ? (
         <></>
       ) : (
-        <span
-          className={`text-xs text-neutral-600 font-extralight ${textAlignment}`}
-        >{`${message.user.firstName} ${message.user.lastName} at ${new Date(
-          message.createdAt
-        ).toLocaleTimeString([], {
-          hour: '2-digit',
-          minute: '2-digit',
-        })}`}</span>
+        <div className={`w-full flex text-xs text-neutral-600 font-extralight`}>
+          <span className={textAlignment}>{`${name} at ${date}`}</span>
+        </div>
       )}
       <p className={`break-all ${textAlignment}`}>{message.content}</p>
     </div>
   );
 
   return (
-    <div className={`flex gap-2 ${simpleBubble ? 'pt-1' : 'pt-4'}`}>
+    <div
+      className={`gap-2 flex items-start ${
+        simpleBubble ? 'pt-1' : 'pt-3 md:pt-4'
+      }`}
+    >
       {message.user.id === user.id ? (
         <>
           {messageBubble}

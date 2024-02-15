@@ -29,6 +29,8 @@ export type Message = {
 
   roomId: string;
 
+  optimisticId: string;
+
   /** Get all the fields for this record. Useful for not having to list out all the fields you want to retrieve, but slower. */
   _all: Record<string, any>;
 };

@@ -1,9 +1,11 @@
 import { SignedIn } from '@gadgetinc/react';
 import React, { ComponentProps, ReactNode } from 'react';
 import { FunctionComponent } from 'react';
-import Logo from './base/Logo';
+import Logo, { LogoText } from './base/Logo';
 import { useUser } from '@gadgetinc/react';
 import { api } from '../api';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGear } from '@fortawesome/free-solid-svg-icons';
 
 interface HeaderProps {}
 
@@ -11,9 +13,13 @@ const Header: FunctionComponent<HeaderProps> = () => {
   const user = useUser(api);
 
   return (
-    <nav className='flex items-center justify-between h-[64px] pr-5 '>
-      <div className='flex-1'>
-        <Logo />
+    <nav className='flex items-center justify-between h-14 pr-5'>
+      <div className='pl-1 md:pl-2 pt-1 md:pt-2 h-full'>
+        <SettingsIcon></SettingsIcon>
+      </div>
+
+      <div className='mx-auto'>
+        <Logo></Logo>
       </div>
       <div className='flex items-center justify-center gap-5'>
         <SignedIn>
@@ -46,6 +52,20 @@ export const HeaderItem: FunctionComponent<HeaderItemProps> = ({
       className='decoration-transparent hover:decoration-lightning-yellow-500 hover:underline underline-offset-8 transition ease-in-out duration-300 hover:-translate-y-1 py-3 hover:cursor-pointer'
     >
       {children}
+    </div>
+  );
+};
+
+export const SettingsIcon = () => {
+  return (
+    <div
+      className={`rounded-2xl hover:cursor-pointer select-none text-xl bg-neutral-100 h-full flex px-3 items-center`}
+    >
+      <FontAwesomeIcon
+        icon={faGear}
+        size='lg'
+        color='neutral-300'
+      ></FontAwesomeIcon>
     </div>
   );
 };

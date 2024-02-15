@@ -9,39 +9,36 @@ interface FooterProps extends ComponentProps<'footer'> {}
 
 const Footer: FunctionComponent<FooterProps> = () => {
   return (
-    <footer className='flex justify-between p-4 text-gray-500 font-extralight text-sm'>
+    <footer className='flex justify-between p-3 text-gray-500 font-extralight text-sm'>
       <ul className='flex items-center'>
-        <li>Created by John Dykes</li>
+        <li>
+          Created by{' '}
+          <a href='https://jwmdykes.ca'>
+            <span className='text-neutral-600 hover:underline underline-offset-2 hover:text-lightning-yellow-500 after:content-[→]'>
+              John Dykes
+            </span>
+          </a>
+        </li>
       </ul>
-      <div className='flex flex-row gap-5 items-center'>
-        <span>Check me out at</span>
+      <div className='flex flex-row gap-4 items-center'>
+        <span className='hidden md:inline-block'>Check me out at</span>
 
         <ul className='flex items-center gap-3'>
-          <li className='hover:text-lightning-yellow-500'>
+          <li className='hover:text-lightning-yellow-500 transition-all duration-200'>
             <a href='https://github.com/jwmdykes'>
               <FontAwesomeIcon icon={faGithub} size='xl'></FontAwesomeIcon>
             </a>
           </li>
-          <li className='hover:text-lightning-yellow-500'>
+          <li className='hover:text-lightning-yellow-500 transition-all duration-200'>
             <a href='mailto:98johndykes@gmail.com'>
               <FontAwesomeIcon icon={faEnvelope} size='xl'></FontAwesomeIcon>
             </a>
           </li>
-          <li className='hover:text-lightning-yellow-500'>
+          <li className='hover:text-lightning-yellow-500 transition-all duration-200'>
             <a href='https://github.com/jwmdykes'>
               <FontAwesomeIcon icon={faMedium} size='xl' />
             </a>
           </li>
-
-          <ul>
-            <a href='https://jwmdykes.ca'>
-              <img
-                src={jwmdykesFaviconURL}
-                alt='jwmdykes.ca favicon'
-                className='max-h-5 brightness-125 saturate-0 hover:saturate-100'
-              />
-            </a>
-          </ul>
         </ul>
       </div>
     </footer>

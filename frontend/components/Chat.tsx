@@ -1,6 +1,6 @@
 import { useUser, useFindMany, useActionForm } from '@gadgetinc/react';
 import { api } from '../api';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import MessageList from './Messages/MessageList';
 import InputBox from './Messages/InputBox';
 
@@ -12,6 +12,7 @@ const Chat = ({ ...props }: ChatProps) => {
     last: 20,
     live: true,
     select: {
+      optimisticId: true, // client created id so we can optimistically show the message in the UI and replace it with the actual message.
       id: true,
       content: true,
       createdAt: true,
@@ -26,15 +27,24 @@ const Chat = ({ ...props }: ChatProps) => {
 
   const [optimisticMessages, setOptimisticMessages] = useState<any>([]);
 
-  const messages = useMemo(() => {
-    return [...(data || []), ...(optimisticMessages || [])];
+  const messages = useMemo<any>(() => {
+    // console.log('optimistic:', optimisticMessages)
+    const optimisticIds = data?.map((msg: any) => msg.optimisticId);
+    // console.log('optimisticIds:', optimisticIds);
+    const optimisticNoDuplicateMessages = optimisticMessages.filter(
+      (msg: any) => {
+        !optimisticIds?.includes(msg.optimisticId);
+      }
+    );
+    console.log('no duplicates:', optimisticNoDuplicateMessages);
+    return [...(data || []), ...(optimisticNoDuplicateMessages || [])];
   }, [data, optimisticMessages]);
 
   if (error) {
     console.error(error);
     return (
-      <div className='prose w-full h-full flex justify-center items-center mx-auto'>
-        <h1 className='bg-red-100 p-8 rounded-2xl border-b-4 border-l-4 border-red-300 shadow-sm'>
+      <div className='prose-sm md:prose-base w-full h-full flex justify-center items-center mx-auto'>
+        <h1 className='bg-red-100 p-4 md:p-8 rounded-2xl border-b-4 border-l-4 border-red-300 shadow-sm'>
           Error Loading Messages.
         </h1>
       </div>
@@ -42,26 +52,35 @@ const Chat = ({ ...props }: ChatProps) => {
   }
 
   const sendMessage = async (messageText: string) => {
-    const optimisticId = (Date.now() + Math.random()).toString();
-    const optimisticMessage = {
-      content: messageText,
-      room: '123',
-      user: user,
-    };
+    // we generate an id in the client so we can optimistically show the created message to the user.
+    // There is a potential for messages showing that weren't really sent, but a page refresh will fix this.
+    // Ideally there would be an indicator when a message fails to send.
+    const optimisticId = crypto.randomUUID();
+
     setOptimisticMessages((prev: any) => {
       const opt = [
         ...prev,
         {
           id: optimisticId,
-          ...optimisticMessage,
+          optimisticId: optimisticId,
+          content: messageText,
+          createdAt: Date.now(),
+          room: '123',
+          user: {
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            googleImageUrl: user.googleImageUrl,
+          },
         },
       ];
       return opt;
     });
 
     try {
-      await api.message.create({
+      const newMessage = await api.message.create({
         content: messageText,
+        optimisticId: optimisticId,
         room: {
           _link: '123',
         },
@@ -69,17 +88,15 @@ const Chat = ({ ...props }: ChatProps) => {
           _link: user.id,
         },
       });
+      console.log('we created a new message:', newMessage);
     } finally {
-      setOptimisticMessages((prev: any) =>
-        prev.filter((msg: any) => msg.id !== optimisticId)
-      );
     }
   };
 
   return (
     <div className='flex flex-col h-full justify-end'>
-      <div className='flex-grow max-h-fit p-6 overflow-y-scroll'>
-        <div className='max-w-4xl mx-auto mt-'>
+      <div className='flex-grow max-h-fit p-2 md:p-6 overflow-y-scroll'>
+        <div className='max-w-4xl mx-auto'>
           <MessageList messages={messages} user={user} />
         </div>
       </div>

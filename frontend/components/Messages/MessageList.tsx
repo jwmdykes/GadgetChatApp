@@ -22,7 +22,7 @@ const MessageList: FunctionComponent<MessageListProps> = ({
   }, [messages]);
 
   return (
-    <ul className={clsx('flex flex-col gap-3 mt-auto', className)}>
+    <ul className={clsx('flex flex-col mt-auto', className)}>
       {messages?.map((message, index) => (
         <li key={message.id}>
           <MessageBubble

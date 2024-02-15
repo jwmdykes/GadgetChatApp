@@ -32,7 +32,7 @@ const MessageBubble: FunctionComponent<MessageBubbleProps> = ({
 
   const messageBubble = (
     <div
-      className={`flex flex-col px-6 py-2 justify-center items-center max-w-2xl w-fit shadow-md text-lg ${bubbleStyle}`}
+      className={`flex flex-col px-6 py-2 justify-center items-center max-w-2xl w-fit shadow-sm text-lg ${bubbleStyle}`}
     >
       {simpleBubble ? (
         <></>
@@ -51,7 +51,7 @@ const MessageBubble: FunctionComponent<MessageBubbleProps> = ({
   );
 
   return (
-    <div className='flex gap-2'>
+    <div className={`flex gap-2 ${simpleBubble ? 'pt-1' : 'pt-4'}`}>
       {message.user.id === user.id ? (
         <>
           {messageBubble}

@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import MessageList from './Messages/MessageList';
 import InputBox from './Messages/InputBox';
 
-export interface ChatProps {}
+export interface ChatProps { }
 
 const Chat = ({ ...props }: ChatProps) => {
   const user = useUser(api);
@@ -28,15 +28,12 @@ const Chat = ({ ...props }: ChatProps) => {
   const [optimisticMessages, setOptimisticMessages] = useState<any>([]);
 
   const messages = useMemo<any>(() => {
-    // console.log('optimistic:', optimisticMessages)
     const optimisticIds = data?.map((msg: any) => msg.optimisticId);
-    // console.log('optimisticIds:', optimisticIds);
     const optimisticNoDuplicateMessages = optimisticMessages.filter(
       (msg: any) => {
-        !optimisticIds?.includes(msg.optimisticId);
+        return !optimisticIds?.includes(msg.optimisticId);
       }
     );
-    console.log('no duplicates:', optimisticNoDuplicateMessages);
     return [...(data || []), ...(optimisticNoDuplicateMessages || [])];
   }, [data, optimisticMessages]);
 
@@ -78,7 +75,7 @@ const Chat = ({ ...props }: ChatProps) => {
     });
 
     try {
-      const newMessage = await api.message.create({
+      await api.message.create({
         content: messageText,
         optimisticId: optimisticId,
         room: {
@@ -88,7 +85,6 @@ const Chat = ({ ...props }: ChatProps) => {
           _link: user.id,
         },
       });
-      console.log('we created a new message:', newMessage);
     } finally {
     }
   };

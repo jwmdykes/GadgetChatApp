@@ -64,8 +64,6 @@ export const RoomIcon: FunctionComponent<RoomIconProps> = ({
   const finalColor =
     color || roomColors[Math.floor(Math.random() * roomColors.length)];
 
-  console.log(finalColor);
-
   return (
     <div
       className={`rounded-2xl ${

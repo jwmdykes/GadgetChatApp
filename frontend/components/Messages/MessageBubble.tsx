@@ -22,10 +22,10 @@ const MessageBubble: FunctionComponent<MessageBubbleProps> = ({
     message.user.id === user.id ? 'ml-auto' : 'ml-auto md:ml-0 md:mr-auto';
 
   const profilePicture = simpleBubble ? (
-    <div className='w-10 h-10 md:w-12 md:h-12'></div>
+    <div className='w-10 md:w-12'></div>
   ) : (
     <img
-      className='md:mt-[1px] rounded-full w-10 h-10 md:h-12 md:w-12 shadow-md hover:cursor-pointer transform'
+      className='rounded-full w-10 h-10 md:h-12 md:w-12 shadow-md hover:cursor-pointer transform'
       src={message.user.googleImageUrl}
       alt={`${message.user.firstName} ${message.user.lastName}'s profile picture`}
     />
@@ -40,7 +40,7 @@ const MessageBubble: FunctionComponent<MessageBubbleProps> = ({
 
   const messageBubble = (
     <div
-      className={`flex flex-col px-4 md:px-6 py-2 justify items-center max-w-2xl w-fit shadow-sm text-base md:text-lg ${bubbleStyle}`}
+      className={`flex flex-col px-4 md:px-6 py-2 justify-start items-center max-w-2xl w-fit shadow-sm text-base md:text-lg ${bubbleStyle}`}
     >
       {simpleBubble ? (
         <></>
@@ -55,9 +55,7 @@ const MessageBubble: FunctionComponent<MessageBubbleProps> = ({
 
   return (
     <div
-      className={`gap-2 flex items-start ${
-        simpleBubble ? 'pt-1' : 'pt-3 md:pt-4'
-      }`}
+      className={`gap-2 flex items-start ${simpleBubble ? 'pt-1 md:pt-2' : 'pt-3 md:pt-4'}`}
     >
       {message.user.id === user.id ? (
         <>

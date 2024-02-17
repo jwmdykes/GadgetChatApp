@@ -59,7 +59,7 @@ export const HeaderItem: FunctionComponent<HeaderItemProps> = ({
 export const SettingsIcon = () => {
   return (
     <div
-      className={`rounded-2xl hover:cursor-pointer select-none text-xl bg-neutral-100 h-full flex px-3 items-center`}
+      className={`rounded-2xl hover:cursor-pointer select-none text-xl h-full flex px-3 items-center hover:bg-neutral-200 hover:shadow-md transition-all duration-300`}
     >
       <FontAwesomeIcon
         icon={faGear}

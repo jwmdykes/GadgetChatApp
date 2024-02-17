@@ -20,6 +20,7 @@ import SignedInPage from './routes/signed-in';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
+import { RoomContextProvider } from './contexts/RoomContext';
 
 const App = () => {
   useEffect(() => {
@@ -60,6 +61,7 @@ const Layout = () => {
   const navigate = useNavigate();
 
   return (
+    // <RoomContextProvider>
     <Provider
       api={api}
       navigate={navigate}
@@ -80,6 +82,7 @@ const Layout = () => {
         </div>
       </div>
     </Provider>
+    // </RoomContextProvider>
   );
 };
 

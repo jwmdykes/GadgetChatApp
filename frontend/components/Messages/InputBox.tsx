@@ -48,7 +48,7 @@ const SubmitButton: FunctionComponent<SubmitButtonProps> = ({
   return (
     <button
       className={clsx(
-        'min-h-full flex flex-1 justify-center items-center hover:text-lightning-yellow-500 text-neutral-400',
+        'min-h-full flex flex-1 justify-center items-center hover:text-lightning-yellow-500 text-gray-500 transition-colors duration-200',
         className
       )}
       {...props}

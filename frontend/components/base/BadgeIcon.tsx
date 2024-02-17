@@ -18,7 +18,7 @@ export const BadgeIcon: FunctionComponent<BadgeIconProps> = ({
       {...props}
       className={`${
         active ? 'bg-${color}' : ''
-      } rounded-2xl hover:cursor-pointer select-none text-xl aspect-square h-full flex px-3 items-center justify-center hover:bg-neutral-200 hover:shadow-md transition-all duration-300`}
+      } rounded-2xl hover:cursor-pointer select-none text-xl aspect-square h-full flex px-3 items-center justify-center hover:bg-neutral-200 hover:shadow-md transition-colors duration-300`}
     >
       {children}
     </div>

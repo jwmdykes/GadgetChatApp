@@ -98,7 +98,7 @@ const Chat = ({ ...props }: ChatProps) => {
           <MessageList messages={messages} user={user} />
         </div>
       </div>
-      <div className='z-10'>
+      <div>
         <InputBox sendMessage={sendMessage} />
       </div>
     </div>

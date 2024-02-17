@@ -6,12 +6,14 @@ import { api } from '../api';
 import { BadgeIcon } from './base/BadgeIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import Modal, { ModalButton, ModalH1, ModalH2 } from './base/Modal';
 
 interface SidebarProps extends ComponentProps<'nav'> {}
 
 const Sidebar: FunctionComponent<SidebarProps> = () => {
-  const user = useUser(api);
   const [activeRoom, setActiveRoom] = useState<number>(0);
+  const [newServerModalVisible, setNewServerModalVisible] =
+    useState<boolean>(false);
   const [{ data: rooms, fetching, error }, refetch] = useFindMany(api.room, {
     select: {
       id: true,
@@ -41,11 +43,34 @@ const Sidebar: FunctionComponent<SidebarProps> = () => {
           </li>
         ))}
         <li>
-          <BadgeIcon active={false}>
+          <BadgeIcon
+            active={false}
+            onClick={() => {
+              setNewServerModalVisible(true);
+            }}
+          >
             <FontAwesomeIcon icon={faPlus} size={'lg'}></FontAwesomeIcon>
           </BadgeIcon>
         </li>
       </ul>
+      {newServerModalVisible && (
+        <Modal closeModal={() => setNewServerModalVisible(false)}>
+          <ModalH1>New Server</ModalH1>
+          <ModalH2>
+            Create a new server to start chatting with your friends.
+          </ModalH2>
+          <form
+            onSubmit={() => {
+              alert('submit');
+            }}
+            className='flex w-full h-full justify-center items-center'
+          >
+            <input type='text' name='name' id='name' />
+            <input type='text' name='' id='' />
+            <ModalButton type='submit'>Submit</ModalButton>
+          </form>
+        </Modal>
+      )}
     </nav>
   );
 };

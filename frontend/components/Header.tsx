@@ -6,6 +6,7 @@ import { useUser } from '@gadgetinc/react';
 import { api } from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
+import { BadgeIcon } from './base/BadgeIcon';
 
 interface HeaderProps {}
 
@@ -15,7 +16,13 @@ const Header: FunctionComponent<HeaderProps> = () => {
   return (
     <nav className='flex items-center justify-between h-14 pr-5'>
       <div className='pl-1 md:pl-2 pt-1 md:pt-2 h-full'>
-        <SettingsIcon></SettingsIcon>
+        <BadgeIcon active={false}>
+          <FontAwesomeIcon
+            icon={faGear}
+            size='lg'
+            color='neutral-300'
+          ></FontAwesomeIcon>
+        </BadgeIcon>
       </div>
 
       <div className='mx-auto'>
@@ -52,20 +59,6 @@ export const HeaderItem: FunctionComponent<HeaderItemProps> = ({
       className='decoration-transparent hover:decoration-lightning-yellow-500 hover:underline underline-offset-8 transition ease-in-out duration-300 hover:-translate-y-1 py-3 hover:cursor-pointer'
     >
       {children}
-    </div>
-  );
-};
-
-export const SettingsIcon = () => {
-  return (
-    <div
-      className={`rounded-2xl hover:cursor-pointer select-none text-xl h-full flex px-3 items-center hover:bg-neutral-200 hover:shadow-md transition-all duration-300`}
-    >
-      <FontAwesomeIcon
-        icon={faGear}
-        size='lg'
-        color='neutral-300'
-      ></FontAwesomeIcon>
     </div>
   );
 };

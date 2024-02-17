@@ -1,1 +1,0 @@
-const BadgeIconProps, { children: ReactNode };

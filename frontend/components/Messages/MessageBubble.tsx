@@ -1,8 +1,10 @@
 import { ComponentProps, FunctionComponent } from 'react';
-import { Message, User } from './Types';
+import { Message } from '@gadget-client/chat-demo';
+import { User } from '@gadget-client/chat-demo';
+import defaultUserIcon from '../../assets/default-user-icon.svg';
 
 interface MessageBubbleProps extends ComponentProps<'section'> {
-  message: any;
+  message: Message;
   user: User;
   simpleBubble: boolean; // simpler version of message for consecutive messages by the same user.
 }
@@ -26,7 +28,7 @@ const MessageBubble: FunctionComponent<MessageBubbleProps> = ({
   ) : (
     <img
       className='rounded-full w-10 h-10 md:h-12 md:w-12 shadow-md hover:cursor-pointer transform'
-      src={message.user.googleImageUrl}
+      src={message.user.googleImageUrl ?? defaultUserIcon}
       alt={`${message.user.firstName} ${message.user.lastName}'s profile picture`}
     />
   );
@@ -55,7 +57,9 @@ const MessageBubble: FunctionComponent<MessageBubbleProps> = ({
 
   return (
     <div
-      className={`gap-2 flex items-start ${simpleBubble ? 'pt-1 md:pt-2' : 'pt-3 md:pt-4'}`}
+      className={`gap-2 flex items-start ${
+        simpleBubble ? 'pt-1 md:pt-2' : 'pt-3 md:pt-4'
+      }`}
     >
       {message.user.id === user.id ? (
         <>

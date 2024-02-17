@@ -3,11 +3,13 @@ import { api } from '../api';
 import { useState, useMemo, useEffect } from 'react';
 import MessageList from './Messages/MessageList';
 import InputBox from './Messages/InputBox';
+import { User } from '@gadget-client/chat-demo';
+import { Message } from '@gadget-client/chat-demo';
 
-export interface ChatProps { }
+export interface ChatProps {}
 
 const Chat = ({ ...props }: ChatProps) => {
-  const user = useUser(api);
+  const user: User = useUser(api);
   const [{ data, fetching, error }, refetch] = useFindMany(api.message, {
     last: 20,
     live: true,
@@ -27,7 +29,7 @@ const Chat = ({ ...props }: ChatProps) => {
 
   const [optimisticMessages, setOptimisticMessages] = useState<any>([]);
 
-  const messages = useMemo<any>(() => {
+  const messages = useMemo<Message[]>(() => {
     const optimisticIds = data?.map((msg: any) => msg.optimisticId);
     const optimisticNoDuplicateMessages = optimisticMessages.filter(
       (msg: any) => {

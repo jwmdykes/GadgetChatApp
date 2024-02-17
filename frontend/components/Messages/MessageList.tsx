@@ -1,8 +1,9 @@
 import { useRef, useEffect } from 'react';
 import { ComponentProps, FunctionComponent } from 'react';
 import MessageBubble from './MessageBubble';
-import { Message, User } from './Types';
 import clsx from 'clsx';
+import { Message } from '@gadget-client/chat-demo';
+import { User } from '@gadget-client/chat-demo';
 
 interface MessageListProps extends ComponentProps<'ul'> {
   className?: string;

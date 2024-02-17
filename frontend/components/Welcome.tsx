@@ -1,9 +1,9 @@
-import { User } from './Messages/Types';
+import { User } from '@gadget-client/chat-demo';
 
-const Welcome = function ({ user }: User) {
+const Welcome = function ({ firstName }: User) {
   return (
     <div className='prose lg:prose-lg mx-auto'>
-      <h1>Welcome, {user.firstName}!</h1>
+      <h1>Welcome, {firstName}!</h1>
       <p>
         Discover the endless possibilities of culinary arts with our exclusive
         guide. Whether you're a seasoned chef or just starting out, there's

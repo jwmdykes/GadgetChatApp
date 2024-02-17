@@ -3,7 +3,6 @@ import { ComponentProps, FunctionComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMedium, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import jwmdykesFaviconURL from '../assets/jwmdykes-favicon.ico';
 
 interface FooterProps extends ComponentProps<'footer'> {}
 

@@ -42,6 +42,7 @@ const MessageBubble: FunctionComponent<MessageBubbleProps> = ({
 
   const messageBubble = (
     <div
+      tabIndex={0}
       className={`flex flex-col px-4 md:px-6 py-2 justify-start items-center max-w-2xl w-fit shadow-sm text-base md:text-lg ${bubbleStyle}`}
     >
       {simpleBubble ? (

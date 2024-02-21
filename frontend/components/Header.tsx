@@ -45,7 +45,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
 
 export default Header;
 
-interface HeaderItemProps extends ComponentProps<'div'> {
+interface HeaderItemProps extends ComponentProps<'button'> {
   children: ReactNode;
 }
 
@@ -54,11 +54,11 @@ export const HeaderItem: FunctionComponent<HeaderItemProps> = ({
   ...props
 }) => {
   return (
-    <div
+    <button
       {...props}
       className='decoration-transparent hover:decoration-lightning-yellow-500 hover:underline underline-offset-8 transition ease-in-out duration-300 hover:-translate-y-1 py-3 hover:cursor-pointer'
     >
       {children}
-    </div>
+    </button>
   );
 };

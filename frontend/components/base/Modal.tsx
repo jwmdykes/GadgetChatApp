@@ -7,8 +7,8 @@ import {
 } from 'react';
 import clsx from 'clsx';
 
-interface ModalProps extends ComponentProps<'div'> {
-  children: ReactNode;
+export interface ModalProps extends ComponentProps<'div'> {
+  children?: ReactNode;
   closeModal?: MouseEventHandler<HTMLDivElement>;
 }
 
@@ -27,8 +27,8 @@ const Modal: FunctionComponent<ModalProps> = ({
           if (closeModal) closeModal(e);
         }}
       />
-      <article className='fixed z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
-        <Card className='w-full h-full'>{children}</Card>
+      <article className='fixed z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 lg:w-1/2 2xl:w-1/3]'>
+        <Card className='w-full max-h-[90vh]'>{children}</Card>
       </article>
     </>
   );
@@ -49,7 +49,7 @@ export const Card: FunctionComponent<CardProps> = ({
     <div
       {...props}
       className={clsx(
-        'p-16 rounded-2xl bg-white shadow-md border-b-4 border-l-4 border-lightning-yellow-400',
+        'p-4 md:p-8 lg:p-16 rounded-2xl bg-white shadow-md border-b-4 border-l-4 border-lightning-yellow-400',
         className
       )}
     >
@@ -68,7 +68,7 @@ export const ModalH1 = ({ children }: { children: ReactNode }) => {
 
 export const ModalH2 = ({ children }: { children: ReactNode }) => {
   return (
-    <h2 className='flex justify-center items-center text-lg text-neutral-400 font-light pb-20'>
+    <h2 className='flex justify-center items-center text-lg text-neutral-400 font-light pb-10'>
       {children}
     </h2>
   );

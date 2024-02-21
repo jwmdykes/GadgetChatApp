@@ -19,7 +19,7 @@ import Index from './routes/index';
 import SignedInPage from './routes/signed-in';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Sidebar from './components/Sidebar';
+import Sidebar from './components/Sidebar/Sidebar';
 import { RoomContextProvider } from './contexts/RoomContext';
 
 const App = () => {

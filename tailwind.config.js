@@ -29,10 +29,14 @@ module.exports = {
       },
       fontFamily: {
         varelaRound: ['Varela Round'],
+        protestRiot: ['Protest Riot'],
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [require('@tailwindcss/typography'), require('daisyui')],
+  daisyui: {
+    themes: ['light'],
+  },
   safelist: [
     'bg-pastel-blue',
     'bg-pastel-red',

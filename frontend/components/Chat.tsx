@@ -21,6 +21,9 @@ const Chat = ({ room, user }: ChatProps) => {
       id: true,
       content: true,
       createdAt: true,
+      room: {
+        id: true,
+      },
       user: {
         id: true,
         firstName: true,
@@ -37,11 +40,6 @@ const Chat = ({ room, user }: ChatProps) => {
 
   const [optimisticMessages, setOptimisticMessages] = useState<any>([]);
 
-  // clear optimistic messages whenever the room changes
-  useEffect(() => {
-    setOptimisticMessages([]);
-  }, [room]);
-
   const messages = useMemo<Message[]>(() => {
     const optimisticIds = data?.map((msg: any) => msg.optimisticId);
     const optimisticNoDuplicateMessages = optimisticMessages.filter(
@@ -49,6 +47,7 @@ const Chat = ({ room, user }: ChatProps) => {
         return !optimisticIds?.includes(msg.optimisticId);
       }
     );
+
     return [...(data || []), ...(optimisticNoDuplicateMessages || [])];
   }, [data, optimisticMessages]);
 

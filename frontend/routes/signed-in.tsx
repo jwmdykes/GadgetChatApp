@@ -8,5 +8,12 @@ import { api } from '../api';
 export default function () {
   const { room } = useContext(RoomContext) || {};
   const user = useUser(api);
-  return <Main>{room && user && <Chat room={room} user={user} />}</Main>;
+  return (
+    <Main>
+      {/* to force the Chat component to rerender when the room changes,
+          we set the room id as its key.
+      */}
+      {room && user && <Chat room={room} user={user} key={room.id} />}
+    </Main>
+  );
 }

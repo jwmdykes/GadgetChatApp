@@ -13,7 +13,7 @@ const InputBox: FunctionComponent<InputBoxProps> = ({
 }) => {
   return (
     <form
-      className='flex bg-white rounded-bl-2xl py-3 px-6 w-full border-t b-[1px] border-neutral-200 m-0'
+      className='flex bg-neutral-50 rounded-bl-2xl py-3 px-6 w-full border-t b-[1px] border-neutral-200 m-0'
       onSubmit={(e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -27,7 +27,7 @@ const InputBox: FunctionComponent<InputBoxProps> = ({
       <input
         type='text'
         name='input'
-        className='w-full focus:outline-none '
+        className='w-full focus:outline-none bg-neutral-50'
         placeholder='Start typing a message'
         autoComplete='off'
         {...props}

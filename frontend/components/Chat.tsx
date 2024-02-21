@@ -3,16 +3,16 @@ import { api } from '../api';
 import { useState, useMemo, useEffect, useContext } from 'react';
 import MessageList from './Messages/MessageList';
 import InputBox from './Messages/InputBox';
-import { User } from '@gadget-client/chat-demo';
+import { Room, User } from '@gadget-client/chat-demo';
 import { Message } from '@gadget-client/chat-demo';
-import { RoomContextProvider, RoomContext } from '../contexts/RoomContext';
+import RoomHeader from './RoomHeader';
 
-export interface ChatProps {}
+export interface ChatProps {
+  room: Room;
+  user: User;
+}
 
-const Chat = ({ ...props }: ChatProps) => {
-  const user: User = useUser(api);
-  const { room } = useContext(RoomContext) || {};
-
+const Chat = ({ room, user }: ChatProps) => {
   const [{ data, fetching, error }, refetch] = useFindMany(api.message, {
     last: 20,
     live: true,
@@ -30,7 +30,7 @@ const Chat = ({ ...props }: ChatProps) => {
     },
     filter: {
       room: {
-        equals: room?.id,
+        equals: room.id,
       },
     },
   });
@@ -64,7 +64,7 @@ const Chat = ({ ...props }: ChatProps) => {
   }
 
   const sendMessage = async (messageText: string) => {
-    if (!room?.id) {
+    if (!room.id) {
       throw new Error('must be in room to send a message.');
     }
     // we generate an id in the client so we can optimistically show the created message to the user.
@@ -109,6 +109,13 @@ const Chat = ({ ...props }: ChatProps) => {
 
   return (
     <div className='flex flex-col h-full justify-end'>
+      <div>
+        <RoomHeader
+          name={room.name}
+          description={room.description}
+          joinURL={'/'}
+        ></RoomHeader>
+      </div>
       <div className='flex-grow max-h-fit p-2 md:p-6 overflow-y-scroll'>
         <div className='max-w-4xl mx-auto'>
           <MessageList messages={messages} user={user} />

@@ -1,5 +1,5 @@
 import { useFindMany } from '@gadgetinc/react';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ComponentProps, FunctionComponent } from 'react';
 import { api } from '../../api';
 import { BadgeIcon } from '../base/BadgeIcon';
@@ -13,7 +13,7 @@ interface SidebarProps extends ComponentProps<'nav'> {}
 
 const Sidebar: FunctionComponent<SidebarProps> = () => {
   const roomContext = useContext(RoomContext);
-  const [activeRoom, setActiveRoom] = useState<number>(0);
+  const [activeRoom, setActiveRoom] = useState<number | null>(null);
   const changeRoom = function (room: Room | null, idx: number) {
     roomContext?.setRoom(room);
     setActiveRoom(idx);
@@ -24,6 +24,13 @@ const Sidebar: FunctionComponent<SidebarProps> = () => {
   const [{ data: rooms, fetching, error }, refetch] = useFindMany(api.room, {
     live: true,
   });
+
+  // select first room by default
+  useEffect(() => {
+    if (!activeRoom && rooms?.length && rooms?.length > 0) {
+      changeRoom(rooms[0], 0);
+    }
+  }, [rooms]);
 
   if (error) {
     console.error(error);

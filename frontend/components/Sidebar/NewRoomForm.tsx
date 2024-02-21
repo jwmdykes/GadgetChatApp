@@ -19,13 +19,6 @@ const NewRoomForm: FunctionComponent<NewRoomFormProps> = ({ ...props }) => {
     formState: { isSubmitSuccessful, errors },
   } = useActionForm(api.room.create);
 
-  const getInputClassName = (fieldName: string) => {
-    const isError = errors?.[fieldName]?.message;
-    return `px-4 py-2 border ${
-      isError ? 'border-red-500' : 'focus:ring-2 focus:ring-blue-500'
-    } rounded-md focus:outline-none`;
-  };
-
   return (
     <Modal {...props}>
       <ModalH1>New Room</ModalH1>

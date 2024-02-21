@@ -1,15 +1,18 @@
 import { useUser, useFindMany, useActionForm } from '@gadgetinc/react';
 import { api } from '../api';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useContext } from 'react';
 import MessageList from './Messages/MessageList';
 import InputBox from './Messages/InputBox';
 import { User } from '@gadget-client/chat-demo';
 import { Message } from '@gadget-client/chat-demo';
+import { RoomContextProvider, RoomContext } from '../contexts/RoomContext';
 
 export interface ChatProps {}
 
 const Chat = ({ ...props }: ChatProps) => {
   const user: User = useUser(api);
+  const { room } = useContext(RoomContext) || {};
+
   const [{ data, fetching, error }, refetch] = useFindMany(api.message, {
     last: 20,
     live: true,
@@ -25,9 +28,19 @@ const Chat = ({ ...props }: ChatProps) => {
         googleImageUrl: true,
       },
     },
+    filter: {
+      room: {
+        equals: room?.id,
+      },
+    },
   });
 
   const [optimisticMessages, setOptimisticMessages] = useState<any>([]);
+
+  // clear optimistic messages whenever the room changes
+  useEffect(() => {
+    setOptimisticMessages([]);
+  }, [room]);
 
   const messages = useMemo<Message[]>(() => {
     const optimisticIds = data?.map((msg: any) => msg.optimisticId);
@@ -51,6 +64,9 @@ const Chat = ({ ...props }: ChatProps) => {
   }
 
   const sendMessage = async (messageText: string) => {
+    if (!room?.id) {
+      throw new Error('must be in room to send a message.');
+    }
     // we generate an id in the client so we can optimistically show the created message to the user.
     // There is a potential for messages showing that weren't really sent, but a page refresh will fix this.
     // Ideally there would be an indicator when a message fails to send.
@@ -64,7 +80,7 @@ const Chat = ({ ...props }: ChatProps) => {
           optimisticId: optimisticId,
           content: messageText,
           createdAt: Date.now(),
-          room: '123',
+          room: room.id,
           user: {
             id: user.id,
             firstName: user.firstName,
@@ -81,7 +97,7 @@ const Chat = ({ ...props }: ChatProps) => {
         content: messageText,
         optimisticId: optimisticId,
         room: {
-          _link: '123',
+          _link: room.id,
         },
         user: {
           _link: user.id,

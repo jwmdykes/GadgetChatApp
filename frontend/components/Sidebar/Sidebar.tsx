@@ -1,26 +1,28 @@
 import { useFindMany } from '@gadgetinc/react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { ComponentProps, FunctionComponent } from 'react';
 import { api } from '../../api';
 import { BadgeIcon } from '../base/BadgeIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import NewRoomForm from './NewRoomForm';
+import { RoomContext } from '../../contexts/RoomContext';
+import { Room } from '@gadget-client/chat-demo';
 
 interface SidebarProps extends ComponentProps<'nav'> {}
 
 const Sidebar: FunctionComponent<SidebarProps> = () => {
+  const roomContext = useContext(RoomContext);
   const [activeRoom, setActiveRoom] = useState<number>(0);
+  const changeRoom = function (room: Room | null, idx: number) {
+    roomContext?.setRoom(room);
+    setActiveRoom(idx);
+  };
+
   const [newServerModalVisible, setNewServerModalVisible] =
     useState<boolean>(false);
   const [{ data: rooms, fetching, error }, refetch] = useFindMany(api.room, {
     live: true,
-    select: {
-      id: true,
-      name: true,
-      color: true,
-      icon: true,
-    },
   });
 
   if (error) {
@@ -33,7 +35,7 @@ const Sidebar: FunctionComponent<SidebarProps> = () => {
       <div className='h-[2px] rounded-full mx-auto w-3/5 bg-neutral-200 mb-2 mt-2'></div>
       <ul className='flex flex-col gap-2 md:gap-3'>
         {rooms?.map((room, idx) => (
-          <li key={room.id} onClick={() => setActiveRoom(idx)}>
+          <li key={room.id} onClick={() => changeRoom(room, idx)}>
             <BadgeIcon color={room.color} active={idx === activeRoom}>
               <span className='font-bold text-3xl font-protestRiot'>
                 {room?.icon ? room.icon : room.name[0].toUpperCase()}

@@ -1,4 +1,9 @@
-import { useUser, useFindMany, useActionForm } from '@gadgetinc/react';
+import {
+  useUser,
+  useFindMany,
+  useActionForm,
+  useSession,
+} from '@gadgetinc/react';
 import { api } from '../api';
 import { useState, useMemo, useEffect, useContext } from 'react';
 import MessageList from './Messages/MessageList';
@@ -13,6 +18,9 @@ export interface ChatProps {
 }
 
 const Chat = ({ room, user }: ChatProps) => {
+  const session = useSession();
+  session.getField('user');
+
   const [{ data, fetching, error }, refetch] = useFindMany(api.message, {
     last: 20,
     live: true,

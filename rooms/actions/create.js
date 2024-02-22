@@ -14,19 +14,6 @@ export async function run({ params, record, logger, api, connections, session })
 
   // Additional action: Log the creation event (example)
   logger.info(`Room created with id: ${record.id}`);
-
-  if (session) {
-    logger.info("Adding user to member list of new room as admin")
-    await api.roomMember.create({
-      room: {
-        _link: record.id
-      },
-      user: {
-        _link: session.user
-      },
-      userRole: 'admin'
-    });
-  }
 }
 
 /**
@@ -36,7 +23,6 @@ export async function run({ params, record, logger, api, connections, session })
  */
 export async function onSuccess({ params, record, logger, api, connections }) {
   // Your custom success logic goes here
-  logger.info(`Successfully created room with id: ${record.id} and performed additional actions.`);
 };
 
 /** Action options */

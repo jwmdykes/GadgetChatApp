@@ -23,24 +23,37 @@ const Sidebar: FunctionComponent<SidebarProps> = () => {
   const [newServerModalVisible, setNewServerModalVisible] =
     useState<boolean>(false);
 
-  // const [
-  //   { data: userRooms, fetching: fetchingUserRooms, error: userRoomsErrur },
-  // ] = useFindMany(api.roomMember, {
-  //   filter: {
-  //     user: { equals: user.id },
-  //   },
-  // });
+  const [
+    { data: userRooms, fetching: fetchingUserRooms, error: userRoomsError },
+  ] = useFindMany(api.roomMember, {
+    select: {
+      room: {
+        id: true,
+      },
+    },
+    filter: {
+      user: { equals: user.id },
+    },
+  });
 
-  // console.log('userRooms', userRooms);
+  if (userRoomsError) {
+    alert('error is here');
+    console.error(userRoomsError);
+  }
 
+  const roomIds = userRooms?.map((item) => item?.room?.id);
   const [{ data: rooms, fetching, error }, refetch] = useFindMany(api.room, {
     live: true,
-    // filter: {
-    //   id: {
-    //     in: userRooms,
-    //   },
-    // },
+    filter: {
+      id: {
+        in: roomIds ?? null,
+      },
+    },
   });
+
+  if (error) {
+    console.error(error);
+  }
 
   // select first room by default
   useEffect(() => {
@@ -48,11 +61,6 @@ const Sidebar: FunctionComponent<SidebarProps> = () => {
       changeRoom(rooms[0], 0);
     }
   }, [rooms]);
-
-  if (error) {
-    console.error(error);
-    return <div>ERROR!</div>;
-  }
 
   return (
     <nav className='w-14 md:w-16 h-full px-1 md:px-2'>

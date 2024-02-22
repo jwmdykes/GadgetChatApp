@@ -1,4 +1,4 @@
-import { useActionForm } from '@gadgetinc/react';
+import { useActionForm, useUser } from '@gadgetinc/react';
 import Modal, {
   ModalButton,
   ModalH1,
@@ -6,12 +6,13 @@ import Modal, {
   ModalProps,
 } from '../base/Modal';
 import { api } from '../../api';
-import { FunctionComponent } from 'react';
+import { FormEvent, FunctionComponent } from 'react';
 import CustomDropdown from '../base/DropDown';
 
 interface NewRoomFormProps extends ModalProps {}
 
 const NewRoomForm: FunctionComponent<NewRoomFormProps> = ({ ...props }) => {
+  const user = useUser(api);
   const {
     register,
     submit,
@@ -19,21 +20,36 @@ const NewRoomForm: FunctionComponent<NewRoomFormProps> = ({ ...props }) => {
     formState: { isSubmitSuccessful, errors },
   } = useActionForm(api.room.create);
 
+  const formSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const value = await submit(e);
+    if (value.error) {
+      console.error(value.error);
+      return;
+    }
+
+    reset();
+    if (!value.data) return;
+
+    await api.roomMember.create({
+      room: {
+        _link: value.data.id,
+      },
+      user: {
+        _link: user.id,
+      },
+      userRole: 'admin',
+    });
+  };
+
   return (
     <Modal {...props}>
       <ModalH1>New Room</ModalH1>
       <ModalH2>Create a new room to start chatting</ModalH2>
 
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          console.log('hit submit', e);
-          submit(e).then((value) => {
-            if (!value.error) {
-              reset();
-            }
-          });
-        }}
+        onSubmit={formSubmit}
         className='flex flex-col w-full max-w-md mx-auto gap-4 md:gap-5'
       >
         {/* Room Name */}

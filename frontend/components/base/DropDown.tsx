@@ -15,12 +15,9 @@ const CustomDropdown = forwardRef(
 
     const handleSelect = (color: string, friendlyName: string) => {
       setIsOpen(false); // Close the dropdown after selection
-      console.log(color);
       setValue(color);
       setFriendlyName(friendlyName);
     };
-
-    console.log('props:', props);
 
     return (
       <div className='relative' ref={dropdownRef}>

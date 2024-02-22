@@ -46,6 +46,19 @@ In order to focus more on the cli, it would need to be more powerful. Some great
   - Options for using typescript, tailwind, git, etc.
   - Discussed in [link](more-options-in-templates)
 
+# Gelly
+
+Since I'm making a chat app, I need more fine-grained permissions than just separating permissions between authenticated and unauthenticated users. To implement these permissions, I am using filters with Gelly. However, it is not particularly easy to learn and the documentation is still not very complete. In particular, what I wanted to do was make it so that a user can only query servers that they are members of. Server memberships are stored in their own table, so what I want to do is something like:
+
+```
+fragment JoinedServers($user: User) on Room {
+  *
+  [where id in (select roomMember.user from roomMember where roomMember.room == id )]
+}
+```
+
+but I couldn't find a way to do anything like this in the documentation.
+
 ## Features that would be nice to have
 
 ### Better integration with git

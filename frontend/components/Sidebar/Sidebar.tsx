@@ -1,4 +1,4 @@
-import { useFindMany } from '@gadgetinc/react';
+import { useFindMany, useUser } from '@gadgetinc/react';
 import { useContext, useEffect, useState } from 'react';
 import { ComponentProps, FunctionComponent } from 'react';
 import { api } from '../../api';
@@ -12,6 +12,7 @@ import { Room } from '@gadget-client/chat-demo';
 interface SidebarProps extends ComponentProps<'nav'> {}
 
 const Sidebar: FunctionComponent<SidebarProps> = () => {
+  const user = useUser(api);
   const roomContext = useContext(RoomContext);
   const [activeRoom, setActiveRoom] = useState<number | null>(null);
   const changeRoom = function (room: Room | null, idx: number) {
@@ -21,13 +22,29 @@ const Sidebar: FunctionComponent<SidebarProps> = () => {
 
   const [newServerModalVisible, setNewServerModalVisible] =
     useState<boolean>(false);
+
+  // const [
+  //   { data: userRooms, fetching: fetchingUserRooms, error: userRoomsErrur },
+  // ] = useFindMany(api.roomMember, {
+  //   filter: {
+  //     user: { equals: user.id },
+  //   },
+  // });
+
+  // console.log('userRooms', userRooms);
+
   const [{ data: rooms, fetching, error }, refetch] = useFindMany(api.room, {
     live: true,
+    // filter: {
+    //   id: {
+    //     in: userRooms,
+    //   },
+    // },
   });
 
   // select first room by default
   useEffect(() => {
-    if (!activeRoom && rooms?.length && rooms?.length > 0) {
+    if (!activeRoom && rooms?.length && rooms.length > 0) {
       changeRoom(rooms[0], 0);
     }
   }, [rooms]);

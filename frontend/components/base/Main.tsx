@@ -1,7 +1,7 @@
 import { ComponentProps, FunctionComponent, ReactNode } from 'react';
 
 interface MainProps extends ComponentProps<'main'> {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const Main: FunctionComponent<MainProps> = ({ children, ...props }) => {

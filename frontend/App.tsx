@@ -17,6 +17,7 @@ import './App.css';
 import { api } from './api';
 import Index from './routes/index';
 import SignedInPage from './routes/signed-in';
+import JoinRoomPage from './routes/join-room';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Sidebar from './components/Sidebar/Sidebar';
@@ -36,6 +37,14 @@ const App = () => {
             <SignedOutOrRedirect path='/signed-in'>
               <Index />
             </SignedOutOrRedirect>
+          }
+        />
+        <Route
+          path='/join-room/:roomid'
+          element={
+            <SignedInOrRedirect path='/'>
+              <JoinRoomPage />
+            </SignedInOrRedirect>
           }
         />
         <Route

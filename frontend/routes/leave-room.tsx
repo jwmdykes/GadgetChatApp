@@ -30,10 +30,6 @@ export default function () {
       },
     });
 
-  console.log('roomid:', roomid);
-  console.log('userid:', user.id);
-  console.log('roomMember:', roomMember);
-
   const handleLeaveRoom = async () => {
     if (!user || !roomid) {
       console.error('No user or room ID found');
@@ -45,7 +41,6 @@ export default function () {
         await api.roomMember.delete(member.id);
       });
 
-      console.log('User removed from room successfully');
       navigate('/signed-in'); // Redirect the user after leaving the room
     } catch (error) {
       console.error('Error leaving room:', error);

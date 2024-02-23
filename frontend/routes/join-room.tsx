@@ -31,7 +31,6 @@ export default function () {
           _link: user.id,
         },
       });
-      console.log('User added to room successfully');
     } catch (error) {
       console.error('Error adding user to room:', error);
     }

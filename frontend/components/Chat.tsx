@@ -117,7 +117,7 @@ const Chat = ({ room, user }: ChatProps) => {
         description={room.description}
         joinURL={`${window.location.origin}/join-room/${room.id}`}
       ></RoomHeader>
-      <div className='flex-grow max-h-fit p-2 md:p-6 overflow-y-scroll'>
+      <div className='flex-grow h-full p-2 md:p-6 overflow-y-scroll'>
         <div className='max-w-4xl mx-auto'>
           <MessageList messages={messages} user={user} />
         </div>

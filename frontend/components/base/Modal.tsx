@@ -60,7 +60,7 @@ export const Card: FunctionComponent<CardProps> = ({
 
 export const ModalH1 = ({ children }: { children: ReactNode }) => {
   return (
-    <h1 className='flex justify-center items-center text-2xl font-medium p-1'>
+    <h1 className='flex justify-center items-center text-2xl font-medium p-1 text-center'>
       {children}
     </h1>
   );
@@ -68,7 +68,7 @@ export const ModalH1 = ({ children }: { children: ReactNode }) => {
 
 export const ModalH2 = ({ children }: { children: ReactNode }) => {
   return (
-    <h2 className='flex justify-center items-center text-lg text-neutral-400 font-light pb-10'>
+    <h2 className='flex justify-center items-center text-lg text-neutral-400 font-light pb-10 text-center'>
       {children}
     </h2>
   );

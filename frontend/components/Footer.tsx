@@ -1,4 +1,3 @@
-import React from 'react';
 import { ComponentProps, FunctionComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMedium, faGithub } from '@fortawesome/free-brands-svg-icons';

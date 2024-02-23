@@ -1,7 +1,7 @@
 import { SignedIn } from '@gadgetinc/react';
-import React, { ComponentProps, ReactNode } from 'react';
+import { ComponentProps, ReactNode } from 'react';
 import { FunctionComponent } from 'react';
-import Logo, { LogoText } from './base/Logo';
+import Logo from './base/Logo';
 import { useUser } from '@gadgetinc/react';
 import { api } from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

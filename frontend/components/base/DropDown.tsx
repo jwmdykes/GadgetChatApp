@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useState } from 'react';
+import { forwardRef, useRef, useState } from 'react';
 import useOutsideClick from '../../hooks/useOutsideClick';
 
 export interface CustomDropdownProps {

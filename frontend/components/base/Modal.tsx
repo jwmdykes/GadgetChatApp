@@ -2,7 +2,6 @@ import {
   ComponentProps,
   FunctionComponent,
   ReactNode,
-  useState,
   MouseEventHandler,
 } from 'react';
 import clsx from 'clsx';

@@ -1,11 +1,6 @@
-import {
-  useUser,
-  useFindMany,
-  useActionForm,
-  useSession,
-} from '@gadgetinc/react';
+import { useFindMany, useSession } from '@gadgetinc/react';
 import { api } from '../api';
-import { useState, useMemo, useEffect, useContext } from 'react';
+import { useState, useMemo } from 'react';
 import MessageList from './Messages/MessageList';
 import InputBox from './Messages/InputBox';
 import { Room, User } from '@gadget-client/chat-demo';

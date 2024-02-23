@@ -1,5 +1,5 @@
 import { RoomColorEnum } from '@gadget-client/chat-demo';
-import { Component, ComponentProps, FunctionComponent, ReactNode } from 'react';
+import { ComponentProps, FunctionComponent, ReactNode } from 'react';
 
 interface BadgeIconProps extends ComponentProps<'button'> {
   children?: ReactNode;

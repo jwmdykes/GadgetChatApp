@@ -105,6 +105,8 @@ message: GadgetRecord<{
 
 but hardcoding this value means I have to update my component props when my data model changes. This is more generally a pain point when using GraphQL with typescript, but there are tools that make it easier. Alternatively, focusing more on the simpler REST api could also be a good idea, especially considering that the focus of Gadget is on making apps as quickly and easily as possible.
 
+Maybe after updating, I now seem to have access to more types, but it's still not perfect. For example, when using `useUser()` it's not eactly the same type as the provided `User` type.
+
 ### More supported frameworks!
 
 I love using React, so it's great that Gadget supports React. But given that they use Vite which supports other frameworks, I wonder why Gadget doesn't support these too. It seems like this should be possible.

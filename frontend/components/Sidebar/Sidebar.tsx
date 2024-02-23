@@ -40,12 +40,14 @@ const Sidebar: FunctionComponent<SidebarProps> = () => {
     console.error(userRoomsError);
   }
 
-  const roomIds = userRooms?.map((item) => item?.room?.id);
+  const roomIds = userRooms
+    ?.filter((item) => item?.room?.id != null)
+    .map((item) => item?.room?.id) as string[];
   const [{ data: rooms, fetching, error }, refetch] = useFindMany(api.room, {
     live: true,
     filter: {
       id: {
-        in: roomIds ?? null,
+        in: roomIds && roomIds.length > 0 ? roomIds : undefined,
       },
     },
   });
@@ -57,7 +59,7 @@ const Sidebar: FunctionComponent<SidebarProps> = () => {
   // select first room by default
   useEffect(() => {
     if (!activeRoom && rooms?.length && rooms.length > 0) {
-      changeRoom(rooms[0], 0);
+      changeRoom(rooms[0] as unknown as Room, 0);
     }
   }, [rooms]);
 
@@ -66,7 +68,10 @@ const Sidebar: FunctionComponent<SidebarProps> = () => {
       <div className='h-[2px] rounded-full mx-auto w-3/5 bg-neutral-200 mb-2 mt-2'></div>
       <ul className='flex flex-col gap-2 md:gap-3'>
         {rooms?.map((room, idx) => (
-          <li key={room.id} onClick={() => changeRoom(room, idx)}>
+          <li
+            key={room.id}
+            onClick={() => changeRoom(room as unknown as Room, idx)}
+          >
             <BadgeIcon color={room.color} active={idx === activeRoom}>
               <span className='font-bold text-3xl font-protestRiot'>
                 {room?.icon ? room.icon : room.name[0].toUpperCase()}

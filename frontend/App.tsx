@@ -82,13 +82,13 @@ const Layout = () => {
         auth={window.gadgetConfig.authentication}
       >
         <div className='grid grid-cols-[auto_1fr] grid-rows-[auto_minmax(0,1fr)_auto] w-full h-full'>
-          <div className='col-span-1 col-start-1 row-span-1 row-start-2'>
+          <div className='col-span-1 col-start-1 row-span-1 row-start-2 flex h-full'>
             <Sidebar />
           </div>
           <div className='col-span-2 col-start-1 row-span-1 row-start-1'>
             <Header />
           </div>
-          <div className='col-span-1 col-start-2 row-span-1 row-start-2'>
+          <div className='col-span-1 col-start-2 row-span-1 row-start-2 flex h-full w-full'>
             <Outlet />
           </div>
           <div className='col-span-2 col-start-1 row-span-1 row-start-3'>

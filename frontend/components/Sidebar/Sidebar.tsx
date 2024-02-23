@@ -43,11 +43,12 @@ const Sidebar: FunctionComponent<SidebarProps> = () => {
   const roomIds = userRooms
     ?.filter((item) => item?.room?.id != null)
     .map((item) => item?.room?.id) as string[];
+  console.log('roomIds', roomIds);
   const [{ data: rooms, fetching, error }, refetch] = useFindMany(api.room, {
     live: true,
     filter: {
       id: {
-        in: roomIds && roomIds.length > 0 ? roomIds : undefined,
+        in: roomIds && roomIds.length > 0 ? roomIds : [],
       },
     },
   });

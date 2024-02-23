@@ -18,16 +18,13 @@ import { api } from './api';
 import Index from './routes/index';
 import SignedInPage from './routes/signed-in';
 import JoinRoomPage from './routes/join-room';
+import LeaveRoomPage from './routes/leave-room';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Sidebar from './components/Sidebar/Sidebar';
 import { RoomContextProvider } from './contexts/RoomContext';
 
 const App = () => {
-  useEffect(() => {
-    document.title = `Home - ${process.env.GADGET_PUBLIC_APP_SLUG} - Gadget`;
-  }, []);
-
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<Layout />}>
@@ -44,6 +41,14 @@ const App = () => {
           element={
             <SignedInOrRedirect path='/'>
               <JoinRoomPage />
+            </SignedInOrRedirect>
+          }
+        />
+        <Route
+          path='/leave-room/:roomid'
+          element={
+            <SignedInOrRedirect path='/'>
+              <LeaveRoomPage />
             </SignedInOrRedirect>
           }
         />

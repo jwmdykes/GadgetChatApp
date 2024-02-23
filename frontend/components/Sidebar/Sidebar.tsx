@@ -32,12 +32,11 @@ const Sidebar: FunctionComponent<SidebarProps> = () => {
       },
     },
     filter: {
-      user: { equals: user.id },
+      user: { equals: user?.id },
     },
   });
 
   if (userRoomsError) {
-    alert('error is here');
     console.error(userRoomsError);
   }
 

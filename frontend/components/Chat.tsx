@@ -118,9 +118,10 @@ const Chat = ({ room, user }: ChatProps) => {
     <div className='flex flex-col h-full justify-end'>
       <div>
         <RoomHeader
+          id={room.id}
           name={room.name}
           description={room.description}
-          joinURL={'/'}
+          joinURL={`${window.location.origin}/join-room/${room.id}`}
         ></RoomHeader>
       </div>
       <div className='flex-grow max-h-fit p-2 md:p-6 overflow-y-scroll'>

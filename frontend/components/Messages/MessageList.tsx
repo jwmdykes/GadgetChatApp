@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { ComponentProps, FunctionComponent } from 'react';
 import MessageBubble from './MessageBubble';
 import clsx from 'clsx';
@@ -17,10 +17,37 @@ const MessageList: FunctionComponent<MessageListProps> = ({
   user,
 }) => {
   const messagesEndRef = useRef<HTMLLIElement>(null);
+  const [prevWindowHeight, setPrevWindowHeight] = useState(window.innerHeight);
 
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // start at bottom of page
   useEffect(() => {
-    messagesEndRef.current!.scrollIntoView({ behavior: 'instant' });
+    scrollToBottom();
   }, [messages]);
+
+  // scroll to bottom of page on vertical resize
+  // only do so on vertical resize when the window
+  // is getting smaller.
+  useEffect(() => {
+    const handleResize = () => {
+      const currentWindowHeight = window.innerHeight;
+
+      if (currentWindowHeight < prevWindowHeight) {
+        scrollToBottom();
+      }
+
+      setPrevWindowHeight(currentWindowHeight);
+    };
+
+    // Add resize event listener
+    window.addEventListener('resize', handleResize);
+
+    // Clean up
+    return () => window.removeEventListener('resize', handleResize);
+  }, [prevWindowHeight]);
 
   return (
     <ul className={clsx('flex flex-col mt-auto', className)}>
